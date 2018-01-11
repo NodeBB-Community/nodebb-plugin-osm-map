@@ -1,0 +1,21 @@
+{
+  "name": "nodebb-plugin-osm-map",
+  "version": "0.0.1",
+  "description": "Add OpenStreetMap map to nodebb",
+  "main": "library.js",
+  "repository": "https://github.com/RoPP/nodebb-plugin-osm-map",
+  "author": "Rodolphe Pelloux-Prayer <rodolphe@damsy.net>",
+  "license": "MIT",
+  "nbbpm": {
+    "compatibility": "^1.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
+  },
+  "dependencies": {
+    "leaflet": "^1.2.0",
+    "mapbox": "^1.0.0-beta9"
+  }
+}

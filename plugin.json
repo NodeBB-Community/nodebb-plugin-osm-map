@@ -1,0 +1,43 @@
+{
+  "id": "nodebb-plugin-osm-map",
+  "name": "NodeBB OSM map",
+  "description": "Add OpenStreetMap map",
+  "url": "https://github.com/RoPP/nodebb-plugin-osm-map",
+  "library": "./library.js",
+  "hooks": [
+    {
+      "hook": "static:app.load",
+      "method": "init"
+    },
+    {
+      "hook": "filter:admin.header.build",
+      "method": "addAdminNavigation"
+    },
+    {
+      "hook": "filter:navigation.available",
+      "method": "getNavigation"
+    },
+    {
+      "hook": "filter:user.whitelistFields",
+      "method": "whitelistFields"
+    },
+    {
+      "hook": "filter:user.updateProfile",
+      "method": "addCoordinates"
+    }
+  ],
+  "staticDirs": {
+    "static": "./static"
+  },
+  "scripts": [
+    "static/lib/client.js"
+  ],
+  "acpScripts": [
+    "static/lib/admin.js"
+  ],
+  "templates": "static/templates",
+  "modules": {
+    "leaflet.js": "node_modules/leaflet/dist/leaflet.js",
+    "mapbox-sdk.js": "node_modules/mapbox/dist/mapbox-sdk.js"
+  }
+}
