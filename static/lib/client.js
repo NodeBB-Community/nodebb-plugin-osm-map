@@ -21,7 +21,7 @@ function onLoad() {
 				if (user.picture) {
 					html = '<img class="user-icon" src="' + user.picture + '"/>';
 				} else {
-					html = '<div class="user-icon" style="background-color: ' + user['icon:bgColor'] + '};">' + user['icon:text'] + '}</div>';
+					html = '<div class="user-icon" style="background-color: ' + user['icon:bgColor'] + ';">' + user['icon:text'] + '</div>';
 				}
 				var icon = L.divIcon({
 					iconSize: [40, 40],
