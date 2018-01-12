@@ -15,7 +15,7 @@ function onLoad() {
 			}).addTo(map);
 
 			var users = ajaxify.data.users;
-
+			var bounds = L.latLngBounds([]);
 			users.forEach(function (user) {
 				var html;
 				if (user.picture) {
@@ -28,7 +28,9 @@ function onLoad() {
 					iconAnchor: [20, 20],
 					html: '<a href="/user/' + user.userslug + '">' + html + '</a>',
 				});
-				L.marker([user.locationLat, user.locationLon], {
+				var pos = [user.locationLat, user.locationLon];
+				bounds.extend(pos);
+				L.marker(pos, {
 					icon: icon,
 					riseOnHover: true,
 				}).on('click', function () {
@@ -38,6 +40,12 @@ function onLoad() {
 					direction: 'right',
 				});
 			});
+			if (bounds.isValid()) {
+				map.fitBounds(bounds, {
+					padding: [25, 25],
+					maxZoom: 8,
+				});
+			}
 		});
 	}
 }
