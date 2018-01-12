@@ -19,14 +19,14 @@ function onLoad() {
 			users.forEach(function (user) {
 				var html;
 				if (user.picture) {
-					html = `<img class="user-icon" src="${user.picture}"/>`;
+					html = '<img class="user-icon" src="' + user.picture + '"/>';
 				} else {
-					html = `<div class="user-icon" style="background-color: ${user['icon:bgColor']};">${user['icon:text']}</div>`;
+					html = '<div class="user-icon" style="background-color: ' + user['icon:bgColor'] + '};">' + user['icon:text'] + '}</div>';
 				}
 				var icon = L.divIcon({
 					iconSize: [40, 40],
 					iconAnchor: [20, 20],
-					html: `<a href="/user/${user.userslug}">${html}</a>`,
+					html: '<a href="/user/' + user.userslug + '">' + html + '</a>',
 				});
 				L.marker([user.locationLat, user.locationLon], {
 					icon: icon,
