@@ -98,20 +98,28 @@ osmMap.whitelistFields = function (hookData, callback) {
 };
 
 osmMap.addCoordinates = function (profile, callback) {
-	if (profile.data.location !== undefined) {
+	var lon = '';
+	var lat = '';
+	function setLonLat() {
+		profile.data.locationLon = lon;
+		profile.data.locationLat = lat;
+		profile.fields.push('locationLon');
+		profile.fields.push('locationLat');
+	}
+
+	if (profile.data.location && profile.data.location !== '') {
 		var mapboxClient = new mapbox(osmMap._settings.mapboxAccessToken);
 		mapboxClient.geocodeForward(profile.data.location, { limit: 1 }, function (err, res) {
 			if (err) {
 				console.log(err);
 			}
-			var pos = res.features[0].center;
-			profile.data.locationLon = String(pos[0]);
-			profile.data.locationLat = String(pos[1]);
-			profile.fields.push('locationLon');
-			profile.fields.push('locationLat');
+			lon = String(res.features[0].center[0]);
+			lat = String(res.features[0].center[1]);
+			setLonLat();
 			callback(null, profile);
 		});
 	} else {
+		setLonLat();
 		callback(null, profile);
 	}
 };
