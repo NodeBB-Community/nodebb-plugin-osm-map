@@ -30,7 +30,6 @@ function renderMap(req, res, next) {
 		},
 		function (users, next) {
 			async.filter(users, function (user, callback) {
-				console.log(user);
 				return callback(null, user.locationLon && user.locationLat);
 			}, function (err, results) {
 				if (err) {
