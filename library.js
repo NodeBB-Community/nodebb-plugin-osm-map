@@ -71,7 +71,7 @@ osmMap.addAdminNavigation = function (header, callback) {
 	header.plugins.push({
 		route: '/plugins/osm-map',
 		icon: 'fa-map',
-		name: 'OSM Map',
+		name: '[[osm-map:osm-map]]',
 	});
 
 	callback(null, header);
@@ -80,11 +80,11 @@ osmMap.addAdminNavigation = function (header, callback) {
 osmMap.getNavigation = function (core, callback) {
 	core.push({
 		route: '/map',
-		title: 'Map',
+		title: '\\[\\[osm-map:map\\]\\]',
 		enabled: false,
 		iconClass: 'fa-map',
 		textClass: 'visible-xs-inline',
-		text: 'Map',
+		text: '\\[\\[osm-map:map\\]\\]',
 		properties: { },
 		core: false,
 	});

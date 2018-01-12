@@ -36,6 +36,8 @@
     "static/lib/admin.js"
   ],
   "templates": "static/templates",
+  "languages": "static/languages",
+  "defaultLang": "en-GB",
   "modules": {
     "leaflet.js": "node_modules/leaflet/dist/leaflet.js",
     "mapbox-sdk.js": "node_modules/mapbox/dist/mapbox-sdk.js"
