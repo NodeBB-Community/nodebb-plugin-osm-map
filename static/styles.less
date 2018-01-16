@@ -1,0 +1,21 @@
+@import (less) "../node_modules/leaflet/dist/leaflet.css";
+
+@icon-size: 40px;
+
+.leaflet-container {
+	font: inherit;
+}
+
+.leaflet-marker-icon {
+	border-radius: @icon-size / 2;
+	border: none;
+	background: none;
+
+	.user-icon {
+		border-radius: @icon-size / 2;
+		width: @icon-size;
+		height: @icon-size;
+		line-height: @icon-size;
+		font-size: 2em;
+	}
+}

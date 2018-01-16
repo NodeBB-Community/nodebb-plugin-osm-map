@@ -41,5 +41,8 @@
   "modules": {
     "leaflet.js": "node_modules/leaflet/dist/leaflet.js",
     "mapbox-sdk.js": "node_modules/mapbox/dist/mapbox-sdk.js"
-  }
+  },
+  "less": [
+    "static/styles.less"
+  ]
 }
