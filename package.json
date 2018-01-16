@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "leaflet": "^1.2.0",
+    "leaflet.markercluster": "^1.2.0",
     "mapbox": "^1.0.0-beta9"
   }
 }

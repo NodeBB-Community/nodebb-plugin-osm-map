@@ -2,9 +2,17 @@
 
 /* globals $, document, window, ajaxify */
 
+require.config({
+	shim: {
+		'markercluster.js': {
+			deps: ['leaflet.js'],
+		},
+	},
+});
+
 function onLoad() {
 	if (ajaxify.data.template.map) {
-		require(['leaflet'], function (L) {
+		require(['leaflet', 'markercluster'], function (L) {
 			var map = new L.map('map')
 				.setView([46.49, 1.64], 6);
 			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -16,6 +24,31 @@ function onLoad() {
 
 			var users = ajaxify.data.users;
 			var bounds = L.latLngBounds([]);
+			var markers = L.markerClusterGroup({
+				maxClusterRadius: 60,
+				showCoverageOnHover: false,
+				iconCreateFunction: function (cluster) {
+					var n = cluster.getChildCount();
+					var size;
+					var className;
+					if (n < 10) {
+						size = 50;
+						className = 'small';
+					} else if (n < 100) {
+						size = 60;
+						className = 'medium';
+					} else {
+						size = 70;
+						className = 'large';
+					}
+					return L.divIcon({
+						iconSize: [size, size],
+						iconAnchor: [size / 2, size / 2],
+						className: 'leaflet-cluster-icon',
+						html: '<div class="user-icon cluster-' + className + '">' + n + '</div>',
+					});
+				},
+			});
 			users.forEach(function (user) {
 				var html;
 				if (user.picture) {
@@ -30,16 +63,17 @@ function onLoad() {
 				});
 				var pos = [user.locationLat, user.locationLon];
 				bounds.extend(pos);
-				L.marker(pos, {
+				markers.addLayer(L.marker(pos, {
 					icon: icon,
 					riseOnHover: true,
 				}).on('click', function () {
 					window.location = '/user/' + user.userslug;
-				}).addTo(map).bindTooltip(user.username, {
+				}).bindTooltip(user.username, {
 					offset: [20, 0],
 					direction: 'right',
-				});
+				}));
 			});
+			map.addLayer(markers);
 			if (bounds.isValid()) {
 				map.fitBounds(bounds, {
 					padding: [25, 25],

@@ -39,7 +39,8 @@
   "languages": "static/languages",
   "defaultLang": "en-GB",
   "modules": {
-    "leaflet.js": "node_modules/leaflet/dist/leaflet.js",
+    "leaflet.js": "node_modules/leaflet/dist/leaflet-src.js",
+    "markercluster.js": "node_modules/leaflet.markercluster/dist/leaflet.markercluster-src.js",
     "mapbox-sdk.js": "node_modules/mapbox/dist/mapbox-sdk.js"
   },
   "less": [
