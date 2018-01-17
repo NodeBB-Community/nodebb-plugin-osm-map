@@ -109,15 +109,20 @@ osmMap.addCoordinates = function (profile, callback) {
 
 	if (profile.data.location && profile.data.location !== '') {
 		var mapboxClient = new mapbox(osmMap._settings.mapboxAccessToken);
-		mapboxClient.geocodeForward(profile.data.location, { limit: 1 }, function (err, res) {
-			if (err) {
-				console.log(err);
-			}
-			lon = String(res.features[0].center[0]);
-			lat = String(res.features[0].center[1]);
-			setLonLat();
-			callback(null, profile);
-		});
+		mapboxClient.geocodeForward(profile.data.location, { limit: 1 })
+			.then(function (res) {
+				var data = res.entity;
+				if (data.features) {
+					lon = String(data.features[0].center[0]);
+					lat = String(data.features[0].center[1]);
+				}
+				setLonLat();
+				callback(null, profile);
+			})
+			.catch(function (err) {
+				console.log('catch: ' + err);
+				callback(null, profile);
+			});
 	} else {
 		setLonLat();
 		callback(null, profile);
