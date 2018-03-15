@@ -4,8 +4,8 @@
 
 require.config({
 	shim: {
-		'markercluster.js': {
-			deps: ['leaflet.js'],
+		markercluster: {
+			deps: ['leaflet'],
 		},
 	},
 });
