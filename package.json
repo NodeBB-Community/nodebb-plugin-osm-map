@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-osm-map",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Add OpenStreetMap map to nodebb",
   "main": "library.js",
   "repository": "https://github.com/RoPP/nodebb-plugin-osm-map",
