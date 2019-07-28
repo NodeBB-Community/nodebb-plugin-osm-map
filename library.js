@@ -1,6 +1,6 @@
 'use strict';
 
-var meta = module.parent.require('./meta');
+var meta = require.main.require('./src/meta');
 var async = module.parent.require('async');
 var user = require.main.require('./src/user');
 var mapbox = require('mapbox');
