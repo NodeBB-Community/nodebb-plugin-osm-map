@@ -50,6 +50,7 @@ function onLoad() {
 				},
 			});
 			users.forEach(function (user) {
+				var userUrl = config.relative_path + "/user/" + user.userslug;
 				var html;
 				if (user.picture) {
 					html = '<img class="user-icon" src="' + user.picture + '"/>';
@@ -59,7 +60,7 @@ function onLoad() {
 				var icon = L.divIcon({
 					iconSize: [40, 40],
 					iconAnchor: [20, 20],
-					html: '<a href="/user/' + user.userslug + '">' + html + '</a>',
+					html: '<a href="' + userUrl +'">' + html + '</a>',
 				});
 				var pos = [user.locationLat, user.locationLon];
 				bounds.extend(pos);
@@ -67,7 +68,7 @@ function onLoad() {
 					icon: icon,
 					riseOnHover: true,
 				}).on('click', function () {
-					window.location = '/user/' + user.userslug;
+					window.location = userUrl;
 				}).bindTooltip(user.username, {
 					offset: [20, 0],
 					direction: 'right',
