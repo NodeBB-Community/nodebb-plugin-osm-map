@@ -15,10 +15,12 @@ function onLoad() {
 		require(['leaflet', 'markercluster'], function (L) {
 			var map = new L.map('map')
 				.setView([46.49, 1.64], 6);
-			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+			L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 				attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+				tileSize: 512,
 				maxZoom: 18,
-				id: 'mapbox.light',
+				zoomOffset: -1,
+				id: 'mapbox/streets-v11',
 				accessToken: ajaxify.data.settings.mapboxAccessToken,
 			}).addTo(map);
 
