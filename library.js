@@ -1,5 +1,6 @@
 'use strict';
 
+const db = require.main.require('./src/database');
 var meta = require.main.require('./src/meta');
 var async = module.parent.require('async');
 var user = require.main.require('./src/user');
@@ -20,9 +21,7 @@ function renderMap(req, res, next) {
 	var set = 'users:joindate';
 
 	async.waterfall([
-		function (next) {
-			user.getUidsFromSet(set, 0, -1, next);
-		},
+		async () => db.getSetMembers('osmMap.users'),
 		function (uids, next) {
 			user.getUsersWithFields(uids, [
 				'username', 'userslug', 'picture', 'locationLon', 'locationLat', 'status',
@@ -100,11 +99,13 @@ osmMap.whitelistFields = function (hookData, callback) {
 osmMap.addCoordinates = function (profile, callback) {
 	var lon = '';
 	var lat = '';
-	function setLonLat() {
+	async function setLonLat() {
 		profile.data.locationLon = lon;
 		profile.data.locationLat = lat;
 		profile.fields.push('locationLon');
 		profile.fields.push('locationLat');
+
+		await (!!lat && !!lon ? db.setAdd : db.setRemove)('osmMap.users', profile.uid);
 	}
 
 	if (profile.data.location && profile.data.location !== '') {

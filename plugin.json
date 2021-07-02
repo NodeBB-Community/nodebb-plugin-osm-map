@@ -45,5 +45,8 @@
   },
   "less": [
     "static/styles.less"
+  ],
+  "upgrades": [
+    "./upgrades/osm-map-users-set.js"
   ]
 }
