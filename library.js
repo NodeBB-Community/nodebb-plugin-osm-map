@@ -1,25 +1,23 @@
 'use strict';
 
 const db = require.main.require('./src/database');
-var meta = require.main.require('./src/meta');
-var async = module.parent.require('async');
-var user = require.main.require('./src/user');
-var mapbox = require('mapbox');
+const meta = require.main.require('./src/meta');
+const async = module.parent.require('async');
+const user = require.main.require('./src/user');
+const mapbox = require('mapbox');
 
-var osmMap = {
+const osmMap = {
 	_settings: {},
 	_defaults: {
 		mapboxAccessToken: '',
 	},
 };
 
-function renderAdmin(req, res, next) {
+function renderAdmin(req, res) {
 	res.render('admin/plugins/osm-map', {});
 }
 
 function renderMap(req, res, next) {
-	var set = 'users:joindate';
-
 	async.waterfall([
 		async () => db.getSetMembers('osmMap.users'),
 		function (uids, next) {
@@ -28,16 +26,14 @@ function renderMap(req, res, next) {
 			], req.uid, next);
 		},
 		function (users, next) {
-			async.filter(users, function (user, callback) {
-				return callback(null, user.locationLon && user.locationLat);
-			}, function (err, results) {
+			async.filter(users, (user, callback) => callback(null, user.locationLon && user.locationLat), (err, results) => {
 				if (err) {
 					return next(err);
 				}
 				next(null, results);
 			});
 		},
-	], function (err, users) {
+	], (err, users) => {
 		if (err) {
 			return next(err);
 		}
@@ -48,8 +44,8 @@ function renderMap(req, res, next) {
 
 
 osmMap.init = function (params, callback) {
-	var router = params.router;
-	var middleware = params.middleware;
+	const { router } = params;
+	const { middleware } = params;
 
 	router.get('/admin/plugins/osm-map', middleware.admin.buildHeader, renderAdmin);
 	router.get('/api/admin/plugins/osm-map', renderAdmin);
@@ -57,9 +53,9 @@ osmMap.init = function (params, callback) {
 	router.get('/map', middleware.buildHeader, renderMap);
 	router.get('/api/map', renderMap);
 
-	meta.settings.get('osm-map', function (err, settings) {
+	meta.settings.get('osm-map', (err, settings) => {
 		if (err) {
-			console.log('osm-map: failed to retrieve settings' + err.message);
+			console.log(`osm-map: failed to retrieve settings${err.message}`);
 		}
 		Object.assign(osmMap._settings, osmMap._defaults, settings);
 	});
@@ -97,8 +93,8 @@ osmMap.whitelistFields = function (hookData, callback) {
 };
 
 osmMap.addCoordinates = function (profile, callback) {
-	var lon = '';
-	var lat = '';
+	let lon = '';
+	let lat = '';
 	async function setLonLat() {
 		profile.data.locationLon = lon;
 		profile.data.locationLat = lat;
@@ -109,10 +105,10 @@ osmMap.addCoordinates = function (profile, callback) {
 	}
 
 	if (profile.data.location && profile.data.location !== '') {
-		var mapboxClient = new mapbox(osmMap._settings.mapboxAccessToken);
+		const mapboxClient = new mapbox(osmMap._settings.mapboxAccessToken);
 		mapboxClient.geocodeForward(profile.data.location, { limit: 1 })
-			.then(function (res) {
-				var data = res.entity;
+			.then((res) => {
+				const data = res.entity;
 				if (data.features) {
 					lon = String(data.features[0].center[0]);
 					lat = String(data.features[0].center[1]);
@@ -120,8 +116,8 @@ osmMap.addCoordinates = function (profile, callback) {
 				setLonLat();
 				callback(null, profile);
 			})
-			.catch(function (err) {
-				console.log('catch: ' + err);
+			.catch((err) => {
+				console.log(`catch: ${err}`);
 				callback(null, profile);
 			});
 	} else {

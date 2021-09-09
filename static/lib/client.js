@@ -1,7 +1,5 @@
 'use strict';
 
-/* globals $, document, window, ajaxify */
-
 require.config({
 	shim: {
 		markercluster: {
@@ -52,7 +50,7 @@ function onLoad() {
 				},
 			});
 			users.forEach(function (user) {
-				var userUrl = config.relative_path + "/user/" + user.userslug;
+				var userUrl = config.relative_path + '/user/' + user.userslug;
 				var html;
 				if (user.picture) {
 					html = '<img class="user-icon" src="' + user.picture + '"/>';
@@ -62,7 +60,7 @@ function onLoad() {
 				var icon = L.divIcon({
 					iconSize: [40, 40],
 					iconAnchor: [20, 20],
-					html: '<a href="' + userUrl +'">' + html + '</a>',
+					html: '<a href="' + userUrl + '">' + html + '</a>',
 				});
 				var pos = [user.locationLat, user.locationLon];
 				bounds.extend(pos);

@@ -1,7 +1,5 @@
 'use strict';
 
-/* globals $, app, socket, define */
-
 define('admin/plugins/osm-map', ['settings'], function (settings) {
 	var ACP = {};
 
