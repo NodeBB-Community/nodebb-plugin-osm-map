@@ -1,16 +1,8 @@
 'use strict';
 
-require.config({
-	shim: {
-		markercluster: {
-			deps: ['leaflet'],
-		},
-	},
-});
-
 function onLoad() {
 	if (ajaxify.data.template.map) {
-		require(['leaflet', 'markercluster'], function (L) {
+		require(['leaflet', 'leaflet.markercluster'], function (L) {
 			var map = new L.map('map')
 				.setView([46.49, 1.64], 6);
 			L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {

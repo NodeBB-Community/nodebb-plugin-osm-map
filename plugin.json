@@ -32,21 +32,19 @@
   "scripts": [
     "static/lib/client.js"
   ],
-  "acpScripts": [
-    "static/lib/admin.js"
-  ],
   "templates": "static/templates",
   "languages": "static/languages",
   "defaultLang": "en-GB",
   "modules": {
-    "leaflet.js": "node_modules/leaflet/dist/leaflet-src.js",
-    "markercluster.js": "node_modules/leaflet.markercluster/dist/leaflet.markercluster-src.js",
-    "mapbox-sdk.js": "node_modules/mapbox/dist/mapbox-sdk.js"
+    "../admin/plugins/osm-map.js": "static/lib/admin.js"
   },
   "less": [
     "static/styles.less"
   ],
   "upgrades": [
     "./upgrades/osm-map-users-set.js"
-  ]
+  ],
+  "nbbpm": {
+    "compatibility": "^2.0.0"
+  }
 }
