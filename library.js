@@ -38,7 +38,7 @@ function renderMap(req, res, next) {
 			return next(err);
 		}
 
-		res.render('map', { settings: osmMap._settings, users: users });
+		res.render('map', { settings: osmMap._settings, users: users, title: '[[osm-map:map]]' });
 	});
 }
 
