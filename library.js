@@ -85,7 +85,7 @@ osmMap.addCoordinates = function (profile, callback) {
 		profile.fields.push('locationLon');
 		profile.fields.push('locationLat');
 
-		await (!!lat && !!lon ? db.setAdd : db.setRemove)('osmMap.users', profile.uid);
+		await (!!lat && !!lon ? db.setAdd : db.setRemove)('osmMap.users', profile.data.uid);
 	}
 
 	if (profile.data.location && profile.data.location !== '') {
