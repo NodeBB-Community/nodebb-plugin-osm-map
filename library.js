@@ -2,7 +2,6 @@
 
 const db = require.main.require('./src/database');
 const meta = require.main.require('./src/meta');
-const async = module.parent.require('async');
 const user = require.main.require('./src/user');
 const mapbox = require('mapbox');
 
