@@ -3,7 +3,7 @@
   "version": "0.0.13",
   "description": "Add OpenStreetMap map to nodebb",
   "main": "library.js",
-  "repository": "https://github.com/RoPP/nodebb-plugin-osm-map",
+  "repository": "https://github.com/NodeBB-Community/nodebb-plugin-osm-map",
   "author": "Rodolphe Pelloux-Prayer <rodolphe@damsy.net>",
   "license": "MIT",
   "nbbpm": {
