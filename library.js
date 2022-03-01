@@ -17,29 +17,14 @@ function renderAdmin(req, res) {
 	res.render('admin/plugins/osm-map', {});
 }
 
-function renderMap(req, res, next) {
-	async.waterfall([
-		async () => db.getSetMembers('osmMap.users'),
-		function (uids, next) {
-			user.getUsersWithFields(uids, [
-				'username', 'userslug', 'picture', 'locationLon', 'locationLat', 'status',
-			], req.uid, next);
-		},
-		function (users, next) {
-			async.filter(users, (user, callback) => callback(null, user.locationLon && user.locationLat), (err, results) => {
-				if (err) {
-					return next(err);
-				}
-				next(null, results);
-			});
-		},
-	], (err, users) => {
-		if (err) {
-			return next(err);
-		}
+async function renderMap(req, res) {
+	const uids = await db.getSetMembers('osmMap.users');
+	let users = await user.getUsersWithFields(uids, [
+		'username', 'userslug', 'picture', 'locationLon', 'locationLat', 'status',
+	], req.uid);
 
-		res.render('map', { settings: osmMap._settings, users: users, title: '[[osm-map:map]]' });
-	});
+	users = users.filter(user => user.locationLon && user.locationLat);
+	res.render('map', { settings: osmMap._settings, users, title: '[[osm-map:map]]' });
 }
 
 
