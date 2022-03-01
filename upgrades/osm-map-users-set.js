@@ -4,10 +4,7 @@ const batch = require.main.require('./src/batch');
 const db = require.main.require('./src/database');
 
 module.exports = {
-	// you should use spaces
-	// the underscores are there so you can double click to select the whole thing
 	name: '[OSM Map] Add users with location to their own set',
-	// remember, month is zero-indexed (so January is 0, December is 11)
 	timestamp: Date.UTC(2021, 6, 2),
 	method: async function () {
 		const user = require.main.require('./src/user');
