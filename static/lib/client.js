@@ -1,5 +1,10 @@
 'use strict';
 
+// eslint-disable-next-line import/no-unresolved
+const hooks = require('hooks');
+
+hooks.on('action:ajaxify.end', onLoad);
+
 function onLoad() {
 	if (ajaxify.data.template.map) {
 		require(['leaflet', 'leaflet.markercluster'], function (L) {
@@ -76,6 +81,3 @@ function onLoad() {
 		});
 	}
 }
-
-$(document).ready(onLoad);
-$(window).on('action:ajaxify.end', onLoad);
