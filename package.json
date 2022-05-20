@@ -7,7 +7,7 @@
   "author": "Rodolphe Pelloux-Prayer <rodolphe@damsy.net>",
   "license": "MIT",
   "nbbpm": {
-    "compatibility": "^1.7.0"
+    "compatibility": "^2.0.0"
   },
   "devDependencies": {
     "eslint": "8.x",
