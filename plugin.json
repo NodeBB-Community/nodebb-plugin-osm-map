@@ -38,13 +38,13 @@
   "modules": {
     "../admin/plugins/osm-map.js": "static/lib/admin.js"
   },
-  "less": [
-    "static/styles.less"
+  "scss": [
+    "static/styles.scss"
   ],
   "upgrades": [
     "./upgrades/osm-map-users-set.js"
   ],
   "nbbpm": {
-    "compatibility": "^2.0.0"
+    "compatibility": "^3.0.0"
   }
 }
