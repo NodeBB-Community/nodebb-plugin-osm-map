@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-osm-map",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Add OpenStreetMap map to nodebb",
   "main": "library.js",
   "repository": "https://github.com/NodeBB-Community/nodebb-plugin-osm-map",
