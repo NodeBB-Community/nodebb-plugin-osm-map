@@ -7,7 +7,7 @@ hooks.on('action:ajaxify.end', onLoad);
 
 function onLoad() {
 	if (ajaxify.data.template.map) {
-		require(['leaflet', 'leaflet.markercluster'], function (L) {
+		require(['leaflet', 'helpers', 'leaflet.markercluster'], function (L, helpers) {
 			var map = new L.map('map')
 				.setView([46.49, 1.64], 6);
 			L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -47,13 +47,8 @@ function onLoad() {
 				},
 			});
 			users.forEach(function (user) {
+				const html = helpers.buildAvatar(user, '40px', true);
 				var userUrl = config.relative_path + '/user/' + user.userslug;
-				var html;
-				if (user.picture) {
-					html = '<img class="user-icon" src="' + user.picture + '"/>';
-				} else {
-					html = '<div class="user-icon" style="background-color: ' + user['icon:bgColor'] + ';">' + user['icon:text'] + '</div>';
-				}
 				var icon = L.divIcon({
 					iconSize: [40, 40],
 					iconAnchor: [20, 20],
