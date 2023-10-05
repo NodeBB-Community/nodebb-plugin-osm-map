@@ -43,8 +43,5 @@
   ],
   "upgrades": [
     "./upgrades/osm-map-users-set.js"
-  ],
-  "nbbpm": {
-    "compatibility": "^3.0.0"
-  }
+  ]
 }
