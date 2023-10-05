@@ -3,6 +3,7 @@
 const db = require.main.require('./src/database');
 const meta = require.main.require('./src/meta');
 const user = require.main.require('./src/user');
+const routerHelpers = require.main.require('./src/routes/helpers');
 const mapbox = require('mapbox');
 
 const osmMap = {
@@ -11,10 +12,6 @@ const osmMap = {
 		mapboxAccessToken: '',
 	},
 };
-
-function renderAdmin(req, res) {
-	res.render('admin/plugins/osm-map', {});
-}
 
 async function renderMap(req, res) {
 	const uids = await db.getSetMembers('osmMap.users');
@@ -26,16 +23,15 @@ async function renderMap(req, res) {
 	res.render('map', { settings: osmMap._settings, users, title: '[[osm-map:map]]' });
 }
 
-
 osmMap.init = function (params, callback) {
 	const { router } = params;
-	const { middleware } = params;
+	routerHelpers.setupAdminPageRoute(router, '/admin/plugins/osm-map', (req, res) => {
+		res.render('admin/plugins/osm-map', {
+			title: 'Mapbox',
+		});
+	});
 
-	router.get('/admin/plugins/osm-map', middleware.admin.buildHeader, renderAdmin);
-	router.get('/api/admin/plugins/osm-map', renderAdmin);
-
-	router.get('/map', middleware.buildHeader, renderMap);
-	router.get('/api/map', renderMap);
+	routerHelpers.setupPageRoute(router, '/map', renderMap);
 
 	meta.settings.get('osm-map', (err, settings) => {
 		if (err) {

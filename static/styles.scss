@@ -50,7 +50,7 @@ $cluster-lg-size: 70px;
 	}
 
   	.cluster-large {
-		border-radius: calcl($cluster-lg-size / 2);
+		border-radius: calc($cluster-lg-size / 2);
 		height: $cluster-lg-size;
 		width: $cluster-lg-size;
 		line-height: $cluster-lg-size;
