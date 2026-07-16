@@ -1,7 +1,7 @@
 'use strict';
 
 define('admin/plugins/osm-map', ['settings', 'alerts'], function (settings, alerts) {
-	var ACP = {};
+	const ACP = {};
 
 	ACP.init = function () {
 		settings.load('osm-map', $('.osm-map-settings'));

@@ -1,6 +1,5 @@
 'use strict';
 
-// eslint-disable-next-line import/no-unresolved
 const hooks = require('hooks');
 
 hooks.on('action:ajaxify.end', onLoad);
@@ -8,7 +7,7 @@ hooks.on('action:ajaxify.end', onLoad);
 function onLoad() {
 	if (ajaxify.data.template.map) {
 		require(['leaflet', 'helpers', 'leaflet.markercluster'], function (L, helpers) {
-			var map = new L.map('map')
+			const map = new L.map('map')
 				.setView([46.49, 1.64], 6);
 			L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 				attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -19,15 +18,15 @@ function onLoad() {
 				accessToken: ajaxify.data.settings.mapboxAccessToken,
 			}).addTo(map);
 
-			var users = ajaxify.data.users;
-			var bounds = L.latLngBounds([]);
-			var markers = L.markerClusterGroup({
+			const users = ajaxify.data.users;
+			const bounds = L.latLngBounds([]);
+			const markers = L.markerClusterGroup({
 				maxClusterRadius: 60,
 				showCoverageOnHover: false,
 				iconCreateFunction: function (cluster) {
-					var n = cluster.getChildCount();
-					var size;
-					var className;
+					const n = cluster.getChildCount();
+					let size;
+					let className;
 					if (n < 10) {
 						size = 50;
 						className = 'small';
@@ -48,13 +47,13 @@ function onLoad() {
 			});
 			users.forEach(function (user) {
 				const html = helpers.buildAvatar(user, '40px', true);
-				var userUrl = config.relative_path + '/user/' + user.userslug;
-				var icon = L.divIcon({
+				const userUrl = config.relative_path + '/user/' + user.userslug;
+				const icon = L.divIcon({
 					iconSize: [40, 40],
 					iconAnchor: [20, 20],
 					html: '<a href="' + userUrl + '">' + html + '</a>',
 				});
-				var pos = [user.locationLat, user.locationLon];
+				const pos = [user.locationLat, user.locationLon];
 				bounds.extend(pos);
 				markers.addLayer(L.marker(pos, {
 					icon: icon,

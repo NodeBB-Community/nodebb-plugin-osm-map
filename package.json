@@ -6,13 +6,15 @@
   "repository": "https://github.com/NodeBB-Community/nodebb-plugin-osm-map",
   "author": "Rodolphe Pelloux-Prayer <rodolphe@damsy.net>",
   "license": "MIT",
+  "scripts": {
+    "lint": "eslint ."
+  },
   "nbbpm": {
-    "compatibility": "^3.2.0"
+    "compatibility": "^4.14.0"
   },
   "devDependencies": {
-    "eslint": "8.x",
-    "eslint-config-nodebb": "0.1.1",
-    "eslint-plugin-import": "2.x"
+    "eslint": "10.7.0",
+    "eslint-config-nodebb": "2.0.3"
   },
   "dependencies": {
     "leaflet": "^1.6.0",

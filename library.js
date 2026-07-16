@@ -1,9 +1,9 @@
 'use strict';
 
-const db = require.main.require('./src/database');
-const meta = require.main.require('./src/meta');
-const user = require.main.require('./src/user');
-const routerHelpers = require.main.require('./src/routes/helpers');
+const db = nodebb.require('./src/database');
+const meta = nodebb.require('./src/meta');
+const user = nodebb.require('./src/user');
+const routerHelpers = nodebb.require('./src/routes/helpers');
 const mapbox = require('mapbox');
 
 const osmMap = {
@@ -55,11 +55,11 @@ osmMap.addAdminNavigation = function (header, callback) {
 osmMap.getNavigation = function (core, callback) {
 	core.push({
 		route: '/map',
-		title: '\\[\\[osm-map:map\\]\\]',
+		title: '[[osm-map:map]]',
 		enabled: false,
 		iconClass: 'fa-map',
 		textClass: 'visible-xs-inline',
-		text: '\\[\\[osm-map:map\\]\\]',
+		text: '[[osm-map:map]]',
 		properties: { },
 		core: false,
 	});

@@ -1,13 +1,13 @@
 'use strict';
 
-const batch = require.main.require('./src/batch');
-const db = require.main.require('./src/database');
+const batch = nodebb.require('./src/batch');
+const db = nodebb.require('./src/database');
 
 module.exports = {
 	name: '[OSM Map] Add users with location to their own set',
 	timestamp: Date.UTC(2021, 6, 2),
 	method: async function () {
-		const user = require.main.require('./src/user');
+		const user = nodebb.require('./src/user');
 		const { progress } = this;
 
 		await batch.processSortedSet('users:joindate', async (uids) => {
